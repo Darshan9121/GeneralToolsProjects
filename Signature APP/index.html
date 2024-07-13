@@ -10,16 +10,19 @@
             padding: 0px;
         }
         .wrapper{
-            width: auto;
+            width: 100vw;
             height: auto;
-            padding:20px;
+            /* margin:5px auto; */
+            padding:8px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 30px;
+            gap: 10px;
         }
         header{
+            width: 100%;
+            height: fit-content;
             display: flex;
             flex-direction: column;
             /* justify-content: center; */
@@ -27,15 +30,22 @@
             gap:30px;
         }
      
-
+main{
+    width: 100vw;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
         .signature{
-            width: auto;
+            width: 100vw;
             height: auto;
        display: flex;
        flex-direction: column;
-       gap: 10px;
-      padding:5px;
-      margin:5px 19px 0px ;
+       gap: 6px;
+      padding:0px;
+      margin:4px 8px;
+      /* margin:9px; */
             border: 3px solid black;
         }
       
@@ -113,32 +123,44 @@
 
         }
 
-@media (min-width:768px) {
+      
+
+@media only screen and (min-width:768px) {
     .wrapper{
         gap:10px;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        
 
     }
-    .signature{
-        padding: 0px 20px;
-        border: 5px solid gainsboro;
-        border-radius: 10px;
-    }
+   .signature{
+     margin: 10px 60px;
+     height: fit-content;
+   }
+   .signature_canva{
+    height: 50vh;
+   }
+    
     h1{
         color:blue;
         font-weight: bolder;
     }
-    .signature_canva{
-        width: 80vw;
-        height: 50vh;
-    }
+  
     footer{
-        width: 100%;
+        width: 100vw;
+        margin:0px auto;
+        margin:auto;
         height: auto;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding:0px 20px;
+        
     }
+  .social{
+     padding:5px 30px;
+  }
+
    
 
 
@@ -157,20 +179,20 @@
                     <ul class="nav">
                         <li>
                             <label for="color">Text Color Picker</label>
-                            <input type="color" name="" id="color">
+                            <input type="color" name="" id="tcolor"  onchange="change(this)">
                         </li>
                         <li>
                             <label for="color">Background</label>
-                            <input type="color" name="" id="color">
+                            <input type="color" name="" id="bcolor" onchange="change(this)">
                             
                         </li>
                         <li>
                             <label for="color">Font Size</label>
-                            <select name="color" id="color">
+                            <select name="color" id="size" onchange="change(this)">
                                 <option value="5px">5px</option>
-                                <option value="5px">10px</option>
-                                <option value="5px">15x</option>
-                                <option value="5px">20px</option>
+                                <option value="10px">10px</option>
+                                <option value="15px">15x</option>
+                                <option value="20px">20px</option>
                                 <option value="5px">Default</option>
                             </select>
                         </li>
@@ -178,17 +200,17 @@
                 </div>
                 <div class="signature_canva">
                     <!-- Signature Window -->
-                     <canvas>
-
+                     <canvas id="canva">
+ onC
                      </canvas>
 
                 </div>
                 <div class="topMenu">
                     <!-- Bottom Menu -->
                     <ul class="nav">
-                        <li><Button>Close</Button></li>
-                        <li><Button>Save & Download</Button></li>
-                        <li><Button>Retrive saved signature</Button></li>
+                        <li><Button onclick="Click(this)">Close</Button></li>
+                        <li><Button onclick="Click(this)">Save & Download</Button></li>
+                        <li><Button onclick="Click(this)">Retrive saved signature</Button></li>
                     </ul>
                 </div>
             </div>
@@ -220,5 +242,54 @@
               </ul>
         </footer>
     </div>
+    <script>
+        let tcolor=document.getElementById("tcolor");
+        let bcolor=document.getElementById("bcolor");
+        let size=document.getElementById("size");
+        let canva = document.getElementById("canva");
+        var draw = false;
+        var lastx;
+        var lasty;
+        var firstx;
+        var firsty;
+
+        function change(e) {
+            // alert(e.value)
+        }
+
+        function Click(e){
+            // alert(e.innerText);
+        }
+
+        canva.addEventListener("mouseenter",()=>{
+            // alert("you can draw.");
+            draw=true;
+        })
+        canva.addEventListener("mouseleave",()=>{
+            // alert("you can not draw.");
+            draw=false;
+        })
+
+        canva.addEventListener("mousedown",()=>{
+            if(draw){
+
+                console.log("start sign");
+               
+            }
+        })
+
+        canva.addEventListener("mousemove",()=>{
+            console.log("drawing continue");
+        })
+        canva.addEventListener("mouseup",()=>{
+            if(draw){
+
+                console.log("stop sign");
+            }
+        })
+
+
+
+    </script>
 </body>
 </html>
