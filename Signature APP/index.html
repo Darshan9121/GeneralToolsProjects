@@ -208,7 +208,7 @@ main{
                 <div class="topMenu">
                     <!-- Bottom Menu -->
                     <ul class="nav">
-                        <li><Button onclick="Click(this)">Close</Button></li>
+                        <li><Button onclick="Click(this)">Clear</Button></li>
                         <li><Button onclick="Click(this)">Save & Download</Button></li>
                         <li><Button onclick="Click(this)">Retrive saved signature</Button></li>
                     </ul>
@@ -259,6 +259,16 @@ main{
 
         function Click(e){
             // alert(e.innerText);
+            if(e.innerText == "Clear"){
+                alert("canva clear");
+            }
+            else if(e.innerText == "Save & Download"){
+                alert("Save");
+            }
+            else if(e.innerText == "Retrive saved signature"){
+                alert("retrieve");
+
+            }
         }
 
         canva.addEventListener("mouseenter",()=>{

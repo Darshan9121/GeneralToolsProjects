@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resize</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .wrapper{
+            width: fit-content;
+            height: fit-content;
+            padding: 5px;
+        }
+        header{
+            width: 100%;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+            gap:30px;
+        }
+    
+        main{
+    width: fit-content;
+    padding: 10px 12px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    border: 1px solid red;
+        }
+#image_view{
+    width:90vw;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid green;
+}
+
+ #image_view input{
+    font-size: larger;
+    border-radius: 20px;
+  
+ }
+#Image_Functionalites{
+    width:90vw;
+    height: fit-content;
+    display: flex;
+    padding:5px 10px;
+    flex-direction: column;
+    /* justify-content:space-around; */
+    align-items: flex-start;
+    gap: 20px;
+    border: 1px solid green;
+}
+#Image_Functionalites section{
+    /* width: 70vw; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid black;
+}
+
+#Image_Functionalites section div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
+   
+}
+#Image_Functionalites section div label,input[type="radio"] {
+    color: green;
+    background-color: blue;
+}
+
+
+        footer{
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap:10px
+            
+        }
+        footer .profile{
+            width: 80px;
+            height: 80px;
+            border: none;
+            border-radius: 59%;
+            object-fit: cover;
+            object-position: center;
+        }
+        footer p{
+            text-align: center;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+        }
+
+        footer .social{
+            display: flex;
+            list-style: none;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+
+        }
+
+        @media only screen and (min-width:1024px){
+            .wrapper{
+                width: 100vw;
+               display:flex;
+               padding: 20px 0px;
+               flex-direction: column;
+               justify-content: center;
+
+            }
+            main{
+                width: 95%;
+                height: 65vh;
+                flex-direction: row;
+                align-items: center;
+                margin: 20px 10px;
+                gap:30px;
+            }
+            #image_view  {
+                width: 60vw;
+                height: 60vh;
+                
+                /* border: 1px solid violet; */
+            }
+            #Image_Functionalites{
+                height: 59vh;
+                width: 30vw;
+            }
+            
+          
+            footer{
+        width: 100vw;
+        margin:0px auto;
+        margin:auto;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        
+    }
+  .social{
+     padding:5px 30px;
+  }
+          
+
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>Image Resize</h1>
+            <h4>A quick tool for your daily Image resizing need to fulfill with advance feture like Image enhancing so what are you waiting try for free!</h4>
+        </header>
+        <main>
+           <section >
+            <div id="image_view">
+                <input type="file" name="upload"  id="upload">
+            </div>
+           </section>
+           <aside>
+            <div id="Image_Functionalites">
+                <section>
+                    <label for="size">Size:</label>
+                    <div>
+
+                        <label for="r1">Youtube
+
+                            <input type="radio" id="r1" value="Youtube">
+                        </label>
+                        <label for="r2">Instagram
+
+                            <input type="radio" id="r2" value="Instagram">
+                        </label>
+                        <label for="r3">Twiter
+
+                            <input type="radio" id="r3" value="Twiter">
+                        </label>
+                    </div>
+                </section>
+                <section>
+                    <label for="border">Border:</label>
+                    <div>
+                        <label for="r1">None
+
+                            <input type="radio" id="r1" value="None">
+                        </label>
+                        <label for="r2">Semi Rounded
+
+                            <input type="radio" id="r2" value="Semi Rounded">
+                        </label>
+                        
+                        <label for="r3">Complete Rounded
+
+                            <input type="radio" id="r3" value="Complete Rounded">
+                        </label>
+                    </div>
+                </section>
+                <section >
+                    <label for="filter">Filters:</label>
+                    <div >
+                        <div id="filter_demo">
+                            <label for="r1">Blur
+
+                            </label>
+                            <input type="range" id="r1" value="None">
+
+                        </div>
+                        <div id="filter_demo">
+
+                            <label for="r2">Brightness
+
+                            </label>
+                            <input type="range" id="r2" value="Semi Rounded">
+                    </div>
+                    <div id="filter_demo">
+                        <label for="r3">Gray Scale
+
+                        </label>
+                        <input type="range" id="r3" value="Complete Rounded">
+                    </div>
+                    </div>
+                </section>
+            </div>
+           </aside>
+        </main>
+        <footer>
+            <img src="assets/image.png" class="profile" alt="" srcset="">
+            <p>Darshan Hiragar</p>
+            <ul class="social">
+                <li>
+                  <a href="http://"
+                    ><img src="assets/icon-twitter.svg" alt=""
+                  /></a>
+                </li>
+                <li>
+                  <a href="http://"
+                    ><img src="assets/icon-whatsapp.svg" alt=""
+                  /></a>
+                </li>
+                <li>
+                  <a href="http://"
+                    ><img src="assets/icon-linkedin.svg" alt=""
+                  /></a>
+                </li>
+                <li>
+                  <a href="http://"
+                    ><img src="assets/icon-instagram.svg" alt=""
+                  /></a>
+                </li>
+              </ul>
+        </footer>
+    </div>
+</body>
+</html>
