@@ -82,13 +82,14 @@ main{
             padding:10px;
         }
         .signature_canva{
-            width: auto;
-            height: 40vh;
+            width: 100%;
+            height: 600px;
             border: 1px solid green;
         }
         .signature_canva canvas{
             width: 100%;
             height: 100%;
+            /* border: 1px solid red; */
             /* margin: 27px 20px; */
         }
 
@@ -179,17 +180,17 @@ main{
                     <ul class="nav">
                         <li>
                             <label for="color">Text Color Picker</label>
-                            <input type="color" name="" id="tcolor"  onchange="change(this)">
+                            <input type="color" name="tcolor" id="tcolor"  onchange="change(this)">
                         </li>
                         <li>
                             <label for="color">Background</label>
-                            <input type="color" name="" id="bcolor" onchange="change(this)">
+                            <input type="color" name="bcolo" id="bcolor"  onchange="change(this)">
                             
                         </li>
                         <li>
                             <label for="color">Font Size</label>
-                            <select name="color" id="size" onchange="change(this)">
-                                <option value="5px">5px</option>
+                            <select name="size" id="size" onchange="change(this)">
+                                <option value="5px" selected>5px</option>
                                 <option value="10px">10px</option>
                                 <option value="15px">15x</option>
                                 <option value="20px">20px</option>
@@ -246,56 +247,105 @@ main{
         let tcolor=document.getElementById("tcolor");
         let bcolor=document.getElementById("bcolor");
         let size=document.getElementById("size");
-        let canva = document.getElementById("canva");
+        let canva = document.querySelector("canvas");
+        let ctx = canva.getContext("2d");
         var draw = false;
         var lastx;
         var lasty;
         var firstx;
         var firsty;
 
+        
+
         function change(e) {
-            // alert(e.value)
+            
+           let choice = e.name;
+           let value = e.value;
+        //    alert(choice);
+        //    alert(value);
+        switch(choice){
+            case "tcolor":
+                ctx.strokeStyle=value;
+                break;
+                case "bcolo":
+                    ctx.fillStyle=value;
+                    ctx.fillRect(0,0,canva.width,canva.height);
+                    break;
+                    case "size":
+                        ctx.lineWidth(value);
+        }
+           
         }
 
         function Click(e){
             // alert(e.innerText);
             if(e.innerText == "Clear"){
-                alert("canva clear");
+                // ctx.clear();
+                ctx.clearRect(0,0,canva.width,canva.height);
+                // ctx.clearRect(0,0,ctx.width,ctx.height);
+                // alert("canva clear");
             }
             else if(e.innerText == "Save & Download"){
-                alert("Save");
+                localStorage.setItem('canva',canva.toDataURL());
+                let link = document.createElement("a");
+                link.download="My-signature.jpg";
+                link.href=canva.toDataURL();
+                link.click();
+                // alert("Save");
             }
             else if(e.innerText == "Retrive saved signature"){
-                alert("retrieve");
+                let save = localStorage.getItem('canva');
+                // console.log(save);
+                // if(save){
+                    let img = new Image();
+                    img.src=canva;
+                    ctx.drawImage(img);
+                
+                // }
+                // alert("retrieve");
 
             }
         }
 
         canva.addEventListener("mouseenter",()=>{
             // alert("you can draw.");
-            draw=true;
+            // draw=true;
         })
         canva.addEventListener("mouseleave",()=>{
             // alert("you can not draw.");
-            draw=false;
+            // draw=false;
         })
 
         canva.addEventListener("mousedown",()=>{
+           draw=true;
             if(draw){
 
-                console.log("start sign");
-               
+                lastx = event.offsetX;
+                lasty=event.offsetY;
+                
+                // alert("start sign"+event.offsetX+" "+event.offsetY);
             }
+               
+            
         })
 
         canva.addEventListener("mousemove",()=>{
-            console.log("drawing continue");
+            if(draw){
+                ctx.beginPath();
+                ctx.moveTo(lastx,lasty);
+                ctx.lineTo(event.offsetX,event.offsetY);
+                ctx.stroke();
+                lastx=event.offsetX;
+                lasty=event.offsetY;
+            }
+            else{
+
+            }
+            // console.log("drawing continue");
         })
         canva.addEventListener("mouseup",()=>{
-            if(draw){
-
-                console.log("stop sign");
-            }
+           draw=false;
+        //    alert("mouse up");
         })
 
 
