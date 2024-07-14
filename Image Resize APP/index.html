@@ -25,32 +25,30 @@
         }
     
         main{
-    width: fit-content;
+    width: 90vw;
     padding: 10px 12px;
     height: max-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
+    /* background-color:white; */
     align-items: center;
-    border: 5px solid red;
+    border: 5px solid #383535;
     border-radius: 30px;
         }
 #image_view{
-    width:90vw;
+    width:80vw;
     height: 300px;
+    background-color:whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid green;
+    border: 1px solid gainsboro;
     border-radius: 10px;
 }
 
- #image_view input{
-    font-size: larger;
-    border-radius: 20px;
-  
- }
+ 
 #Image_Functionalites{
     width:90vw;
     height: fit-content;
@@ -60,7 +58,8 @@
     /* justify-content:space-around; */
     align-items: flex-start;
     gap: 20px;
-    border: 1px solid green;
+    background-color:whitesmoke;
+    border: 1px solid gainsboro;
     border-radius: 10px;
 }
 #Image_Functionalites section{
@@ -68,6 +67,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    background-color: white;
     /* border: 1px solid black; */
 }
 
@@ -79,10 +79,49 @@
     align-items: center;
     /* justify-content: space-between; */
     /* margin:10px 30px; */
-    border: 1px solid rgb(35, 218, 117);
+    /* border: 1px solid rgb(35, 218, 117); */
     
    
 }
+#image_view input{
+   /* opacity: 0; */
+   display: none;
+   z-index: 2;
+   font-size:medium;
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+}
+img.Img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* #span{
+    width: fit-content;
+   display: flex; 
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 10px 30px ;
+   background-color: blue;
+   border: 1px solid blue;
+   border-radius: 20px;
+}
+#span label{
+    width: 100%;
+    font-size: larger;
+   
+}
+
+#span:hover{
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+} */
+
 #Image_Functionalites section div label,input[type="radio"] {
     /* color: green; */
     /* background-color: blue; */
@@ -120,6 +159,7 @@
             gap: 30px;
 
         }
+      
 
         @media only screen and (min-width:1024px){
             .wrapper{
@@ -177,7 +217,11 @@
         <main>
            <section >
             <div id="image_view">
-                <input type="file" name="upload"  id="upload">
+                <div id="span" for="upload">
+                  <!-- <label for="upload">Upload Image Here</label> -->
+                    <input type="file" name="upload" value="Please Upload Imgae" onchange="data_upload(this);" id="upload">
+                </div>
+                <img src="assets/image.png" alt="This is image" class="Img">
             </div>
            </section>
            <aside>
@@ -186,35 +230,43 @@
                     <label for="size">Size:</label>
                     <div>
 
+                        <label for="r0">Default
+
+                            <input type="radio" id="r0" name="size" value="default" onchange="change(this)" checked>
+                        </label>
                         <label for="r1">Youtube
 
-                            <input type="radio" id="r1" value="Youtube">
+                            <input type="radio" id="r1" name="size" value="Youtube" onchange="change(this)">
                         </label>
                         <label for="r2">Instagram
 
-                            <input type="radio" id="r2" value="Instagram">
+                            <input type="radio" id="r2" name="size" value="Instagram" onchange="change(this)">
                         </label>
                         <label for="r3">Twiter
 
-                            <input type="radio" id="r3" value="Twiter">
+                            <input type="radio" id="r3" name="size" value="Twiter" onchange="change(this)">
                         </label>
                     </div>
                 </section>
                 <section>
                     <label for="border">Border:</label>
                     <div>
-                        <label for="r1">None
+                        <label for="b0" >None
 
-                            <input type="radio" id="r1" value="None">
+                            <input type="radio" name="border" id="b0" value="None" onchange="change(this)" checked >
                         </label>
-                        <label for="r2">Semi Rounded
+                        <label for="b1">Round
 
-                            <input type="radio" id="r2" value="Semi Rounded">
+                            <input type="radio" id="b1" name="border" value="Round"  onchange="change(this)">
+                        </label>
+                        <label for="b2">Semi Rounded
+
+                            <input type="radio" id="b2" name="border" value="Semi Rounded" onchange="change(this)">
                         </label>
                         
-                        <label for="r3">Complete Rounded
+                        <label for="b3">Complete Rounded
 
-                            <input type="radio" id="r3" value="Complete Rounded">
+                            <input type="radio" id="b3" name="border" value="Complete Rounded" onchange="change(this)">
                         </label>
                     </div>
                 </section>
@@ -222,24 +274,24 @@
                     <label for="filter">Filters:</label>
                     <div >
                         <div id="filter_demo">
-                            <label for="r1">Blur
+                            <label for="bl1">Blur
 
                             </label>
-                            <input type="range" id="r1" value="None">
+                            <input type="range" name="blur" id="bl1" value="None" min="0px" max="100px" step="10" onchange="filter(this)">
 
                         </div>
                         <div id="filter_demo">
 
-                            <label for="r2">Brightness
+                            <label for="br2">Brightness
 
                             </label>
-                            <input type="range" id="r2" value="Semi Rounded">
+                            <input type="range" id="br2" name="bright" value="Semi Rounded" min="10" max="200" step="10" onchange="filter(this)">
                     </div>
                     <div id="filter_demo">
-                        <label for="r3">Gray Scale
+                        <label for="g3">Gray Scale
 
                         </label>
-                        <input type="range" id="r3" value="Complete Rounded">
+                        <input type="range" id="g3" name="gray" value="Complete Rounded" min="10" max="100" step="10" onchange="filter(this)">
                     </div>
                     </div>
                 </section>
@@ -273,5 +325,109 @@
               </ul>
         </footer>
     </div>
+    <script>
+        let frame = document.querySelector(".Img");
+        
+        function data_upload(e) {
+        frame.style.display="block";
+        // console.log(event.target.value);
+        // let file = event.target.files[0];
+        // console.log(file);
+
+        let span = document.getElementById("span");
+        span.style.display="none";
+       
+        // frame.style.src="D:/Projects/General Html Projects/Image Resize APP/assets/image.png";
+        // frame.setAttribute("src","block");
+        
+        // frame.setAttribute("src","assets/image.png");
+        // let link = new URL(file);
+        // frame.setAttribute("src",link)
+        // const fr = new FileReader();
+        // fr.addEventListener('loaded',(e)=>{
+
+        // })
+        // let filename = document.getElementById("upload").value;
+
+        // console.log(link);
+        
+
+    }
+
+    function change(e) {
+        let choice = e.value;
+        let img = document.querySelector(".Img");
+        console.log(img);
+        switch (choice) {
+            case "Youtube":
+                 img.style.width="95%";
+                 img.style.height="90%";
+                 break;
+                 case "Instagram":
+                img.style.width="40%";
+                img.style.height="100%";
+                // console.log(choice);
+                break;
+                case "Twiter":
+                img.style.width="30%";
+                img.style.height="100%";
+                // console.log(choice);
+                break;
+            case "Round":
+                img.style.border="2px solid black";
+                img.style.borderRadius="10px";
+                // console.log(choice);
+                break;
+                case "Semi Rounded":
+                img.style.border="2px solid black";
+                img.style.borderRadius="20px";
+                // console.log(choice);
+                break;
+                case "Complete Rounded":
+                img.style.border="2px solid black";
+                img.style.borderRadius="40px";
+                // console.log(choice);
+                break;
+                case "default":
+                img.style.width="100%";
+                img.style.height="100%";
+                // console.log(choice);
+                break;
+                case "None":
+                img.style.border="none";
+                
+                // console.log(choice);
+                break;
+        
+        }
+    }
+
+    function filter(e) {
+        let img = document.querySelector("img.Img");
+        let choice = event.target.name;
+        let value = event.target.value;
+        // console.log(choice,value);
+        console.log(frame);
+        switch (choice) {
+            case "blur":
+                // img.setAttribute("style",`filter:blur(${value}px);`)
+                img.style.filter=`blur(${value}px)`;
+                console.log("blur applied"+`"blur('${value}px')"`);
+                
+                break;
+                case "bright":
+                img.style.filter=`brightness(${value}%)`;
+                // img.setAttribute("style",`filter:(${value}%);`)
+                console.log("brightness applied");
+                break;
+                case "gray":
+                img.style.filter=`grayscale(${value}%)`;
+                console.log("grayness applied");
+                break;
+        }
+    }
+       
+          
+    </script>
 </body>
 </html>
