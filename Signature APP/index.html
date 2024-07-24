@@ -13,6 +13,8 @@
             width: 100vw;
             height: auto;
             /* margin:5px auto; */
+            background-color:#222831 ;
+            color: #EEEEEE;
             padding:8px;
             display: flex;
             flex-direction: column;
@@ -20,10 +22,14 @@
             align-items: center;
             gap: 10px;
         }
+        h1{
+            color: #76ABAE;
+        }
         header{
             width: 100%;
             height: fit-content;
             display: flex;
+            /* background-color: #1B1A55; */
             flex-direction: column;
             /* justify-content: center; */
             align-items: center;
@@ -35,9 +41,11 @@ main{
     height: max-content;
     display: flex;
     justify-content: center;
+    background-color: #31363F;
     align-items: center;
 }
-        .signature{
+.signature{
+    background-color:transparent;
             width: 100vw;
             height: auto;
        display: flex;
@@ -46,7 +54,7 @@ main{
       padding:0px;
       margin:4px 8px;
       /* margin:9px; */
-            border: 3px solid black;
+            /* border: 3px solid black; */
         }
       
 
@@ -63,15 +71,19 @@ main{
         .nav li{
            width: max-content;
            height: max-content;
+           /* background-color: transparent; */
            padding:10px;
+        
         }
         .nav li label{
             width: min-content;
             height: max-content;
+            color: #EEEEEE;
 
         }
         .nav li input,select{
             width:100%;
+            border: none;
         }
         .nav li select{
             padding:5px 1px ;
@@ -84,7 +96,9 @@ main{
         .signature_canva{
             width: 100%;
             height: 600px;
-            border: 1px solid green;
+            /* color: white; */
+            background-color: transparent;
+            border: 1px solid #76ABAE;
         }
         .signature_canva canvas{
             width: 100%;
@@ -94,6 +108,7 @@ main{
         }
 
         footer{
+            /* background-color: #1B1A55; */
             padding: 5px;
             display: flex;
             flex-direction: column;
@@ -144,7 +159,7 @@ main{
    }
     
     h1{
-        color:blue;
+        /* color:blue; */
         font-weight: bolder;
     }
   
@@ -190,11 +205,11 @@ main{
                         <li>
                             <label for="color">Font Size</label>
                             <select name="size" id="size" onchange="change(this)">
-                                <option value="5px" selected>5px</option>
-                                <option value="10px">10px</option>
-                                <option value="15px">15x</option>
-                                <option value="20px">20px</option>
-                                <option value="5px">Default</option>
+                                <option value="7">7px</option>
+                                <option value="5">5px</option>
+                                <option value="4">4px</option>
+                                <option value="3">3px</option>
+                                <option value="2" selected>Default</option>
                             </select>
                         </li>
                     </ul>
@@ -249,7 +264,10 @@ main{
         let size=document.getElementById("size");
         let canva = document.querySelector("canvas");
         let ctx = canva.getContext("2d");
+       
+        ctx.lineWidth=2;
         var draw = false;
+        var canvaimage;
         var lastx;
         var lasty;
         var firstx;
@@ -272,7 +290,8 @@ main{
                     ctx.fillRect(0,0,canva.width,canva.height);
                     break;
                     case "size":
-                        ctx.lineWidth(value);
+                         ctx.lineWidth=value;
+                         alert(ctx.lineWidth);
         }
            
         }
@@ -282,11 +301,13 @@ main{
             if(e.innerText == "Clear"){
                 // ctx.clear();
                 ctx.clearRect(0,0,canva.width,canva.height);
+    //   localStorage.removeItem("canva");
                 // ctx.clearRect(0,0,ctx.width,ctx.height);
                 // alert("canva clear");
             }
             else if(e.innerText == "Save & Download"){
                 localStorage.setItem('canva',canva.toDataURL());
+               
                 let link = document.createElement("a");
                 link.download="My-signature.jpg";
                 link.href=canva.toDataURL();
@@ -294,15 +315,25 @@ main{
                 // alert("Save");
             }
             else if(e.innerText == "Retrive saved signature"){
-                let save = localStorage.getItem('canva');
-                // console.log(save);
-                // if(save){
-                    let img = new Image();
-                    img.src=canva;
-                    ctx.drawImage(img);
-                
+                let save;
+                // save= localStorage.getItem('canva');
+                // // console.log(save);
+                // if(save != null){
+                //     let img = new Image();
                 // }
-                // alert("retrieve");
+                // else{
+                    
+                //     alert("not retrieve");
+                // }
+                if( save = localStorage.getItem("canva")){
+                    alert("found");
+                        img.src=save;
+                        ctx.drawImage(img,0,0);
+                }
+                else{
+                    alert("not found");
+
+                }
 
             }
         }
