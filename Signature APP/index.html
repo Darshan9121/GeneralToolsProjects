@@ -15,7 +15,7 @@
             /* margin:5px auto; */
             background-color:#222831 ;
             color: #EEEEEE;
-            padding:8px;
+            padding:10px 0px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -25,10 +25,14 @@
         h1{
             color: #76ABAE;
         }
+        h4{
+            text-align: center;
+        }
         header{
             width: 100%;
             height: fit-content;
             display: flex;
+            margin:0px 5px 5px;
             /* background-color: #1B1A55; */
             flex-direction: column;
             /* justify-content: center; */
@@ -73,36 +77,59 @@ main{
            height: max-content;
            /* background-color: transparent; */
            padding:10px;
-        
+           
         }
         .nav li label{
+            font-weight: bolder;
             width: min-content;
             height: max-content;
             color: #EEEEEE;
 
         }
+        
         .nav li input,select{
             width:100%;
+            /* border: none; */
+            
+        }
+        .nav li input{
             border: none;
+           
         }
         .nav li select{
+            color: white;
+            
+            background-color: transparent;  border: 2px solid #76ABAE;
+            border-radius: 10px; 
+           
             padding:5px 1px ;
         }
+        .nav li select option{
+            background-color: #31363F;
+            color: #76ABAE;
+        }
+    
         .nav li button{
-            width: auto;
-            height: auto;
-            padding:10px;
+            width: fit-content;
+            height: fit-content;
+            padding:10px 20px;
+            background-color: transparent;
+            border: 1px solid #76ABAE;
+            color: #EEEEEE;
+            font-weight: bolder;
+            border-radius: 30px;
         }
         .signature_canva{
             width: 100%;
             height: 600px;
             /* color: white; */
-            background-color: transparent;
+            /* background-color: ; */
             border: 1px solid #76ABAE;
         }
         .signature_canva canvas{
             width: 100%;
             height: 100%;
+            /* background-color: transparent; */
             /* border: 1px solid red; */
             /* margin: 27px 20px; */
         }
@@ -226,7 +253,7 @@ main{
                     <ul class="nav">
                         <li><Button onclick="Click(this)">Clear</Button></li>
                         <li><Button onclick="Click(this)">Save & Download</Button></li>
-                        <li><Button onclick="Click(this)">Retrive saved signature</Button></li>
+                        <!-- <li><Button onclick="Click(this)">Retrive saved signature</Button></li> -->
                     </ul>
                 </div>
             </div>
@@ -264,8 +291,9 @@ main{
         let size=document.getElementById("size");
         let canva = document.querySelector("canvas");
         let ctx = canva.getContext("2d");
+        let imgdata;
+        // ctx.lineWidth=2;s
        
-        ctx.lineWidth=2;
         var draw = false;
         var canvaimage;
         var lastx;
@@ -273,7 +301,7 @@ main{
         var firstx;
         var firsty;
 
-        
+        // alert(canva.width);
 
         function change(e) {
             
@@ -299,35 +327,28 @@ main{
         function Click(e){
             // alert(e.innerText);
             if(e.innerText == "Clear"){
-                // ctx.clear();
+                
                 ctx.clearRect(0,0,canva.width,canva.height);
-    //   localStorage.removeItem("canva");
-                // ctx.clearRect(0,0,ctx.width,ctx.height);
-                // alert("canva clear");
+                // localStorage.setItem("canvacontent","");
+   
             }
             else if(e.innerText == "Save & Download"){
-                localStorage.setItem('canva',canva.toDataURL());
-               
+                
                 let link = document.createElement("a");
                 link.download="My-signature.jpg";
                 link.href=canva.toDataURL();
+                localStorage.setItem("canvacontent",canva.toDataURL());
+                imgdata=localStorage.getItem("canvacontent");
+                alert("data saved");
                 link.click();
                 // alert("Save");
             }
             else if(e.innerText == "Retrive saved signature"){
-                let save;
-                // save= localStorage.getItem('canva');
-                // // console.log(save);
-                // if(save != null){
-                //     let img = new Image();
-                // }
-                // else{
-                    
-                //     alert("not retrieve");
-                // }
-                if( save = localStorage.getItem("canva")){
-                    alert("found");
-                        img.src=save;
+             imgdata = localStorage.getItem("canvacontent");
+             if(imgdata){
+                 alert("found");
+                        let img = new Image();
+                        img.src=imgdata;
                         ctx.drawImage(img,0,0);
                 }
                 else{
@@ -370,12 +391,14 @@ main{
                 lasty=event.offsetY;
             }
             else{
-
+                
             }
             // console.log("drawing continue");
         })
         canva.addEventListener("mouseup",()=>{
-           draw=false;
+            draw=false;
+            imgdata=localStorage.setItem('canvacontent',canva.toDataURL());
+            // alert("data saved");
         //    alert("mouse up");
         })
 
