@@ -248,10 +248,10 @@ img.Img{
            <section >
             <div id="image_view">
                 <div id="span" for="upload">
-                  <!-- <label for="upload">Upload Image Here</label> -->
-                    <!-- <input type="file" name="upload" value="Please Upload Imgae"  id="upload"> -->
+                  <label for="upload">Upload Image Here</label>
+                    <input type="file" name="upload" value="Please Upload Imgae"  id="upload">
                 </div>
-                <img src="assets/image.png" alt="This is image" class="Img">
+                <img src="#"  class="Img" id="img">
             </div>
            </section>
            <aside>
@@ -356,43 +356,14 @@ img.Img{
         </footer>
     </div>
     <script>
-        let frame = document.querySelector(".Img");
-        const image_input = document.querySelector('#upload');
-image_input.addEventListener('change', function() {
-  const file_reader = new FileReader();
-  file_reader.addEventListener('load', () => {
-    const uploaded_image = file_reader.result;
-
-    frame.src=`url(${uploaded_image})`;
-      
-  });
-  file_reader.readAsDataURL(this.files[0]);
-});
-    //     function data_upload(e) {
-    //     frame.style.display="block";
-    //     // console.log(event.target.value);
-    //     // let file = event.target.files[0];
-    //     // console.log(file);
-
-    //     let span = document.getElementById("span");
-    //     span.style.display="none";
-       
-    //     // frame.style.src="D:/Projects/General Html Projects/Image Resize APP/assets/image.png";
-    //     // frame.setAttribute("src","block");
-        
-    //     // frame.setAttribute("src","assets/image.png");
-    //     // let link = new URL(file);
-    //     // frame.setAttribute("src",link)
-    //     // const fr = new FileReader();
-    //     // fr.addEventListener('loaded',(e)=>{
-
-    //     // })
-    //     // let filename = document.getElementById("upload").value;
-
-    //     // console.log(link);
-        
-
-    // }
+        let img = document.querySelector("#img");
+        img.style.display="none";
+        let input = document.querySelector("#upload");
+        input.addEventListener("change",(e)=>{
+            document.querySelector("#span").style.display="none";
+            img.src=URL.createObjectURL(input.files[0]);
+            img.style.display="block";
+        })
 
     function change(e) {
         let choice = e.value;
@@ -400,16 +371,16 @@ image_input.addEventListener('change', function() {
         console.log(img);
         switch (choice) {
             case "Youtube":
-                 img.style.width="95%";
+                 img.style.width="95vw";
                  img.style.height="90%";
                  break;
                  case "Instagram":
-                img.style.width="40%";
+                img.style.width="50vw";
                 img.style.height="100%";
                 // console.log(choice);
                 break;
                 case "Twiter":
-                img.style.width="30%";
+                img.style.width="40vw";
                 img.style.height="100%";
                 // console.log(choice);
                 break;
