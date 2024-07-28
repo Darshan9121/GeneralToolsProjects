@@ -83,6 +83,17 @@
     /* border: 1px solid black; */
 }
 
+Button{
+            width: 90%;
+            margin: 10px auto;
+            height: fit-content;
+            padding:10px 20px;
+            background-color: #76ABAE;
+            color: #EEEEEE;
+            font-weight: bolder;
+            border-radius: 5px;
+    
+}
 #Image_Functionalites section div{
     width: 100%;
     display: flex;
@@ -218,6 +229,7 @@ img.Img{
                 gap: 10px 5px;
             }
 
+
             
           
             footer{
@@ -323,8 +335,13 @@ img.Img{
                         </label>
                         <input type="range" id="g3" name="gray" value="Complete Rounded" min="10" max="100" step="10" onchange="filter(this)">
                     </div>
-                    </div>
-                </section>
+                    
+                    
+                </div>
+            </section>
+            <!-- <section>
+                <Button onclick="Click(this)" id="button">Download</Button>
+            </section> -->
             </div>
            </aside>
         </main>
@@ -367,7 +384,7 @@ img.Img{
 
     function change(e) {
         let choice = e.value;
-        let img = document.querySelector(".Img");
+        let img = document.querySelector("#img");
         console.log(img);
         switch (choice) {
             case "Youtube":
@@ -414,11 +431,11 @@ img.Img{
     }
 
     function filter(e) {
-        let img = document.querySelector("img.Img");
+        // let img = document.getElementById("img");
         let choice = event.target.name;
         let value = event.target.value;
         // console.log(choice,value);
-        console.log(frame);
+        // console.log(frame);
         switch (choice) {
             case "blur":
                 // img.setAttribute("style",`filter:blur(${value}px);`)
@@ -435,6 +452,24 @@ img.Img{
                 img.style.filter=`grayscale(${value}%)`;
                 console.log("grayness applied");
                 break;
+        }
+    }
+
+    function Click(e) {
+        alert("btn click");
+        console.log( (img.getAttribute('src') !== "#"));
+        if(img.getAttribute('src') !== "#"){
+
+            // alert("img selected");
+            let link = document.createElement("a");
+            link.download="MyImage.jpg";
+            let newimg = document.getElementById("img");
+            link.href=img.src;
+            alert("data saved");
+            link.click();
+        }
+        else{
+            alert("Please select imgae");
         }
     }
        
