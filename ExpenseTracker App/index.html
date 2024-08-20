@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> My Money Manager</title>
+    <style>
+        table {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>My Money Manager</h1>
+        <div id="details">
+            <label for="desc">Expense Description:</label>
+            <input type="text" id="desc" placeholder="Enter your Expense Detail here!">
+            <label for="ctg">Category:</label>
+            <select id="ctg">
+                <option value="Please Select Category" selected>Please Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Fuel">Fuel</option>
+                <option value="Medical">Medical</option>
+                <option value="Fare">Fare</option>
+                <option value="Home Rent">Home Rent</option>
+                <option value="Home Loan">Home Loan</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Salary">Salary</option>
+            </select>
+            <label for="amt">Amount:</label>
+            <input type="number" id="amt" placeholder="Enter your amount here">
+            <button id="dbt" name="dbt" onclick="handle()">Debit</button>
+            <button id="crt" name="crt" onclick="handle()">Credit</button>
+        </div>
+        <div id="history">
+
+            <h2>Transcation History:</h2>
+            <table id="trxHistory">
+                <thead>
+                    <tr>
+                        <th>Money Manager</th>
+                    </tr>
+                    <tr>
+
+
+                        <th>Your Every Day Expense Tracker!</th>
+
+                    </tr>
+                    <tr>
+                        <th>No</th>
+                        <th>Expense Description</th>
+                        <th>Expense Category</th>
+                        <th>Expense Amount</th>
+                        <th>Expense Mode</th>
+                        <th>Expense Date</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                <tfoot>
+
+                    <tr>
+                    
+                        <th>Money Manager By Darshan Hiragar | @darshan9121</th>
+                       
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    let input = document.querySelector('#amt').value;
+    let desc = document.querySelector('#desc').value;
+    let category = document.querySelector('#ctg').value;
+    let dbt = document.querySelector('#dbt');
+    let crt = document.querySelector('#crt');
+    let list = document.querySelector("tbody");
+    let count = 0;
+  
+    
+    localStorage.setItem("balance", 0);
+    let handle = () => {
+        // console.log(last);
+
+        if(input != 0 || desc != "" || category != "Please Select Category"){
+            
+            
+        
+
+        let curBalance = Number(localStorage.getItem("balance"));
+        if (event.target.name == "dbt") {
+            if (curBalance < Number(input || Number(input) == 0 )) {
+                alert("insufficient balance");
+            }
+            else {
+                let newBalance = Number(curBalance - Number(input));
+                
+                localStorage.setItem("balance", newBalance);
+                let date = new Date();
+                
+                let element = document.createElement("tr");
+                element.innerHTML = `
+                 <td>${++count}</td>
+                 <td>${desc}</td>
+                 <td>${category}</td>
+                 <td>${input}</td>
+                 <td>Debited</td>
+                <td>${date}</td>
+                `;
+                list.append(element);
+                console.log(element);
+                alert(input + "debited");
+            }
+        }
+        else if (event.target.name == "crt") {
+           
+                let newBalance = Number(curBalance) + Number(input);
+                localStorage.setItem("balance", newBalance);
+                let date = new Date();
+                let element = document.createElement("tr");
+                element.innerHTML = `
+                 <td>${++count}</td>
+                 <td>${desc}</td>
+                 <td>${category}</td>
+                 <td>${input}</td>
+                 <td>Debited</td>
+                <td>${date}</td>
+                `;
+                list.append(element)
+                alert(input + "credited");
+            
+
+        }
+    }
+    else{
+        alert("Please fill all required fields");
+        document.querySelector("#desc").focus();
+    }
+}
+ 
+
+
+
+  
+
+</script>
+
+</html>

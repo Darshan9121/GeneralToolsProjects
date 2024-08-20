@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+</head>
+<body>
+    <div>
+        <h1>Countdown till Christmas 2025</h1>
+        <h2><span id="d"></span>Days <span id="h"></span> Hours <span id="m"></span> Minutes <span id="s"></span>Seconds</h2>
+    </div>
+</body>
+<script>
+    var timer = setInterval(checkForChristmas,1000);
+  function checkForChristmas(){
+    let dayTime = 1000*60*60*24;
+    let curDate = new Date();
+    let d = document.querySelector("#d");
+    let h = document.querySelector("#h");
+    let m = document.querySelector("#m");
+    let s = document.querySelector("#s");
+    let desireDate = new Date(curDate.getFullYear(),11,25);
+    let time = desireDate - curDate;
+    if(curDate.getMonth() == 11 || curDate.getDay() > 25){
+        // alert("Already passed!");
+        desireDate.setFullYear(curDate.getFullYear()+1);
+    }
+    else{
+        let days = Math.floor((time)/dayTime)
+        // let newRemainTime = days.toFixed(0);
+        let hour = Math.floor((time%(1000*60*60*24))/(1000*60*60));
+        let minute = Math.floor((time%(1000*60*60))/(1000*60));
+        let second = Math.floor((time%(1000*60))/1000);
+        // document.querySelector("h2").innerText = `${days} Days ${hour} Hour ${minute} Minutes ${second} Seconds left in the Christmas 2025!`;
+        d.textContent=days;
+        h.textContent=hour;
+        m.textContent=minute;
+        s.textContent=second;
+        console.log(`${newRemainTime} Days ${hour} Hour ${minute} Minutes ${second} Seconds left in the Christmas 2025!`)
+
+    }
+   
+}
+
+
+   
+</script>
+</html>

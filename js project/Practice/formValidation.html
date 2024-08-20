@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+</head>
+<script>
+    var error=false;
+    
+    function validate() {
+        let btn = document.getElementById("sub");
+        if(!error){
+            alert("form submit");
+            return true;
+        }
+        else{
+            alert("form fail to submit");
+            btn.disabled=true;
+            btn.style.color="red";
+            return false;
+        }
+    }
+
+    function validateInput(e) {
+        if(e.target.name == "email"){
+            let value = e.target.value;
+            
+            if(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)){
+                
+                document.getElementById("mark").innerText="Email is correct";
+                document.getElementById("mark").style.color="green";
+            }
+            else{
+                document.getElementById("mark").innerText="Email is incorrect";
+                document.getElementById("mark").style.color="red";
+                error=true;
+                
+            }
+        }
+        else if(e.target.name == "mob"){
+            let value = e.target.value;
+            const RX = /^[+]{1}(?:[0-9\-\\(\\)\\/.]\s?){6,15}[0-9]{1}$/;
+            if(RX.test(value))
+                {
+                    
+                    // alert("mobilevalidation");
+                    document.getElementById("mark2").innerText="Mobile is correct";
+                    document.getElementById("mark2").style.color="green";
+                }
+                else{
+                    document.getElementById("mark2").innerText="Mobile is incorrect";
+                    document.getElementById("mark2").style.color="red";
+                    error=true;
+                }
+        }
+        
+    }
+
+
+</script>
+<body>
+    <form onsubmit="return validate()">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" required placeholder="xyz@company.com" onchange="validateInput(event)">
+        <label for="email" id="mark"></label>
+
+        <label for="mob">Mobile No</label>
+        <input type="text" name="mob" id="mob" required placeholder="+91 88888....."  onchange="validateInput(event)">
+        <label for="mob" id="mark2"></label>
+        <label  id="mark3"></label>
+        <!-- <button type="submit" id="sub">submit</button> -->
+        <input type="submit" id="sub" value="submit"/>
+    </form>
+</body>
+</html>
