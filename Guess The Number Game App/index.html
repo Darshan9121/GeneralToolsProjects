@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess_The_Number</title>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Guess The Number</h1>
+        <div>
+            <div id="Alert">Notification</div>
+            <div>
+                <label for="inp_num">Guess The Number Between 1 to 100</label>
+                <input type="number" name="inp_num" id="inp_num">
+            </div>
+            <button id="Check">Check</button>
+        </div>
+    </div>
+    <script>
+        let inp_num = document.querySelector("#inp_num");
+        let btn = document.querySelector("#Check");
+        let alert_notification = document.querySelector("#Alert");
+        let  num = Math.round(Math.random()*100);
+        console.log(num);
+        let count = 1;
+        btn.addEventListener('click',(e)=>{
+            if(count <= 3){
+                if(inp_num.value != ""){
+                    
+                    if(num == parseInt(inp_num.value)){
+                        // alert("Congratulation You won!");
+                        console.log(num,inp_num.value);
+                        count == 4;
+                        alert_notification.textContent=`Congratulation You won!`;
+                    }
+                    else{
+                        // alert("Sorry Please try again,You have left "+(3-count)+" chances!");
+                        alert_notification.textContent="Sorry Please try again,You have left "+(3-count)+" chances!";
+                    }
+                }
+                else{
+                    // alert("Please enter the number");
+                    alert_notification.textContent="Please enter the number";
+                }
+            }else if(count == 3){
+                // alert("Your Chances are over!");
+                alert_notification.textContent="Your Chances are over!";
+            }
+            count++;
+        })
+
+    </script>
+</body>
+</html>

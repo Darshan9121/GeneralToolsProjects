@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Logger</title>
+</head>
+<body>
+    <div>
+        <h1>Key Logger</h1>
+        <div>
+            <button id="start_btn">Start Logging Keypresses</button>
+            <button id="stop_btn">Stop Logging Keypresses</button>
+        </div>
+        <div>
+            <div id="key_press">Key Press</div>
+            <div id="key_up">Key Realse</div>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr><th>Key Logs</th></tr>
+                    <tr>
+                        <th>Key Name</th>
+                        <th>Key Press/Realse Time</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr><td>Created by Darshan Hiragar | @darshan9121</td></tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <script>
+        let status = "none";
+        let start_btn = document.querySelector("#start_btn");
+        let stop_btn = document.querySelector("#stop_btn");
+        let key_logs = document.querySelector("tbody");
+        let key_press = document.querySelector("#key_press");
+        let key_up = document.querySelector("#key_up");
+        
+        document.addEventListener("keypress",(e)=>{
+            if(status == "start"){
+                key_press.innerHTML=`<h2>Key Press:${e.key}</h2>`;
+                let element = document.createElement("tr");
+                element.innerHTML = `
+                <td>${e.key}</td>
+                <td>${new Date().toUTCString()}</td>
+                `;
+                key_log(element);
+            }
+            else{
+                key_press.innerHTML=`<h2>No key Press!</h2>`;
+                
+            }
+        })
+        
+        document.addEventListener("keyup",(e)=>{
+            if(status == "start"){
+                key_press.innerHTML=`<h2>No key Press!</h2>`;
+                key_up.innerHTML=`<h2>Key Realese:${e.key}</h2>`;
+                let element = document.createElement("tr");
+                element.innerHTML = `
+                    <td>${e.key}</td>
+                    <td>${new Date().toUTCString()}</td>
+                `;
+                key_log(element);
+
+            }
+            else{
+                key_up.innerHTML=`<h2>No key Realease!</h2>`;
+
+            }
+        })
+
+        start_btn.addEventListener("click",(e)=>{
+            status = "start";
+            alert("star logging");
+        });
+        stop_btn.addEventListener("click",(e)=>{
+            status = "stop";
+            alert("stop logging");
+        });
+
+        
+      function key_log(data){
+          key_logs.appendChild(data);
+      }
+
+    </script>
+</body>
+</html>
