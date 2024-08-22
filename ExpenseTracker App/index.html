@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> My Money Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         table {
             text-align: center;
@@ -13,66 +15,77 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container w-screen  flex flex-col justify-center items-center p-6 gap-4 ">
 
-        <h1>My Money Manager</h1>
-        <div id="details">
-            <label for="desc">Expense Description:</label>
-            <input type="text" id="desc" placeholder="Enter your Expense Detail here!">
-            <label for="ctg">Category:</label>
-            <select id="ctg">
-                <option value="Please Select Category" selected>Please Select Category</option>
-                <option value="Food">Food</option>
-                <option value="Fuel">Fuel</option>
-                <option value="Medical">Medical</option>
-                <option value="Fare">Fare</option>
-                <option value="Home Rent">Home Rent</option>
-                <option value="Home Loan">Home Loan</option>
-                <option value="Groceries">Groceries</option>
-                <option value="Salary">Salary</option>
-            </select>
-            <label for="amt">Amount:</label>
-            <input type="number" id="amt" placeholder="Enter your amount here">
-            <button id="dbt" name="dbt" onclick="handle()">Debit</button>
-            <button id="crt" name="crt" onclick="handle()">Credit</button>
+        <h1 class="text-4xl font-bold">My Money Manager</h1>
+        <div class=" flex flex-col md:flex-row md:items-start md:gap-5 md:p-5 justify-center lg:gap-8">
+
+      
+            <div id="details" class="text-md font-semibold flex flex-col gap-5 p-5 md:p-0  justify-center "  >
+            <h2 class="text-center text-3xl">Expense Details</h2>
+            <div>
+
+                <label for="desc">Expense Description:</label>
+                <input type="text" id="desc" placeholder="Enter Expense Detail here!" class="placeholder:text-md border-2 border-black w-full p-2 rounded-lg">
+            </div>
+            <div>
+
+                <label for="ctg">Category:</label>
+                <select id="ctg" class="border-2 border-black w-full p-2 rounded-lg text-gray-400">
+                    <option value="Please Select Category" selected>Please Select Category!</option>
+                    <option value="Food">Food</option>
+                    <option value="Fuel">Fuel</option>
+                    <option value="Medical">Medical</option>
+                    <option value="Fare">Fare</option>
+                    <option value="Home Rent">Home Rent</option>
+                    <option value="Home Loan">Home Loan</option>
+                    <option value="Groceries">Groceries</option>
+                    <option value="Salary">Salary</option>
+                </select>
+            </div>
+            <div>
+
+                <label for="amt">Amount:</label>
+                <input type="number"  class="placeholder:text-md border-2 border-black w-full p-2 rounded-lg" id="amt" placeholder="Enter your amount here!">
+            </div>
+            <div class="flex justify-center items-center gap-5">
+                <button id="dbt" name="dbt" onclick="handle()" class="border-4 border-green-500 rounded-lg px-5 py-3 hover:bg-green-500 hover:text-white">Debit</button>
+                <button id="crt" name="crt" onclick="handle()"class="border-4 border-red-500 rounded-lg px-5 py-3 hover:bg-red-500 hover:text-white ">Credit</button>
+            </div>
         </div>
-        <div id="history">
+        <div id="history" class="flex flex-col gap-3  justify-center items-center">
 
-            <h2>Transcation History:</h2>
-            <table id="trxHistory">
-                <thead>
-                    <tr>
-                        <th>Money Manager</th>
-                    </tr>
-                    <tr>
-
-
-                        <th>Your Every Day Expense Tracker!</th>
-
-                    </tr>
-                    <tr>
-                        <th>No</th>
-                        <th>Expense Description</th>
-                        <th>Expense Category</th>
-                        <th>Expense Amount</th>
-                        <th>Expense Mode</th>
-                        <th>Expense Date</th>
-
+            <h2 class="text-3xl font-semibold " >Transcation History:</h2>
+            <table id="trxHistory" class="table-fixed  text-[9px] lg:text-[14px] border-separate border-spacing-1 border border-white text-md">
+                <thead >
+                    <tr class="bg-gray-200">
+                        <th class="border px-4 py-2 text-center">No</th>
+                        <th class="border px-4 py-2 text-center">Expense Description</th>
+                        <th class="border px-4 py-2 text-center">Expense Category</th>
+                        <th class="border px-4 py-2 text-center">Expense Amount</th>
+                        <th class="border px-4 py-2 text-center">Expense Mode</th>
+                        <th class="border px-4 py-2 text-center">Expense Date</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    <!-- Table rows will be inserted here -->
                 </tbody>
                 <tfoot>
-
-                    <tr>
-                    
-                        <th>Money Manager By Darshan Hiragar | @darshan9121</th>
-                       
+                    <tr class="bg-gray-200">
+                        <th colspan="6" class="border px-4 py-2 text-center">Money Manager By Darshan Hiragar | @darshan9121</th>
                     </tr>
                 </tfoot>
             </table>
         </div>
+    </div>
+    <div>
+
+        <h2 class="text-xl text-center">Follow Me</h2>
+        <div class="flex justify-center items-center gap-x-5 p-3">
+            <a href=""><img src="../Assets/social_media_icon/ig.png" alt="ig" class="w-[50px] h-[50px] lg:w-[80px] lg:h-[80px]"></a>
+            <a href=""><img src="../Assets/social_media_icon/git.png" alt="git" class="w-[50px] h-[50px] h-[50px] lg:w-[80px] lg:h-[80px]"></a>
+        </div>
+    </div>
     </div>
 </body>
 <script>
@@ -106,6 +119,7 @@
                 let date = new Date();
                 
                 let element = document.createElement("tr");
+                element.setAttribute("class","bg-white")
                 element.innerHTML = `
                  <td>${++count}</td>
                  <td>${desc}</td>
