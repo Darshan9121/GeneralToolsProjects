@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Counter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body>
-    <div>
-        <h1>Countdown till Christmas 2025</h1>
-        <h2><span id="d"></span>Days <span id="h"></span> Hours <span id="m"></span> Minutes <span id="s"></span>Seconds</h2>
+<body class="flex justify-center items-center p-4 bg-white w-screen h-screen ">
+    <div class="flex flex-col  p-5  text-center font-bold  bg-slate-100 rounded-lg ">
+        <h1 class="text-3xl">Countdown till Christmas 2025</h1>
+        <!-- <img src="https://media.tenor.com/tF7QYiNQc4sAAAAM/merry-christmas-wrecking-ball.gif" alt="santa"> -->
+        <!-- <img src="https://media.tenor.com/khQfp9UIU-kAAAAM/happy-new-year-merry.gif" alt="santa" class="rounded-full  "> -->
+         <div class=" flex flex-col gap-y-10 p-5 rounded-lg md:flex md:flex-row md:gap-x-14  md:justify-center md:items-center md:p-10 md:text-5xl ">
+             <img src="https://media1.tenor.com/m/EPtzfU0DDmEAAAAC/merry-xmas-merry-xmas-funny.gif" alt="santa" class="rounded-lg  hover:translate-y-[-5px]">
+             <h2 class="text-2xl md:text-xl lg:text-4xl"><span id="d"></span> Days <span id="h"></span> Hours <span id="m"></span> Minutes <span id="s"></span>Seconds</h2>
+            </div>
+            <h2 class="text-xl">Follow Me</h2>
+            <div class="flex justify-center items-center gap-x-5 p-3">
+                <a href=""><img src="../Assets/social_media_icon/ig.png" alt="ig" class="w-[50px] h-[50px] lg:w-[80px] lg:h-[80px]"></a>
+                <a href=""><img src="../Assets/social_media_icon/git.png" alt="git" class="w-[50px] h-[50px] h-[50px] lg:w-[80px] lg:h-[80px]"></a>
+            </div>
     </div>
 </body>
 <script>
