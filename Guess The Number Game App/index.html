@@ -4,35 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess_The_Number</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
         }
+
     </style>
 </head>
-<body>
-    <div>
-        <h1>Guess The Number</h1>
-        <div>
-            <div id="Alert">Notification</div>
-            <div>
-                <label for="inp_num">Guess The Number Between 1 to 100</label>
-                <input type="number" name="inp_num" id="inp_num">
+<body class="w-screen  flex justify-center items-center p-3">
+    <div class=" w-full flex flex-col p-4 gap-12 justify-center items-center">
+        <h1 class="text-4xl font-bold">Guess Her Age</h1>
+        <div class="flex flex-col justify-center  gap-6 ">
+            <div id="Alert" class="w-full h-fit p-5 border-2 border-black rounded-lg hidden">Notification</div>
+            <div class=" flex flex-col  justify-center items-center gap-5 px-5 py-3  border-2 border-black rounded-lg text-3xl">
+                <label for="inp_num">Guess your crush's Age:</label>
+                <input type="number" name="inp_num" id="inp_num" class="w-full border-2 border-black rounded-lg ">
             </div>
-            <button id="Check">Check</button>
+            <button id="Check" class="w-full p-3 border-2 border-black rounded-lg text-2xl">Check</button>
+            <button id="reset" class="w-full p-3 border-2 border-black rounded-lg text-2xl hidden">Restart</button>
         </div>
     </div>
     <script>
         let inp_num = document.querySelector("#inp_num");
         let btn = document.querySelector("#Check");
+        let reset = document.querySelector("#reset");
         let alert_notification = document.querySelector("#Alert");
         let  num = Math.round(Math.random()*100);
         console.log(num);
-        let count = 1;
+        var count = 1;
         btn.addEventListener('click',(e)=>{
             if(count <= 3){
+               
                 if(inp_num.value != ""){
                     
                     if(num == parseInt(inp_num.value)){
@@ -40,6 +46,7 @@
                         console.log(num,inp_num.value);
                         count == 4;
                         alert_notification.textContent=`Congratulation You won!`;
+                        btn.disabled = true;
                     }
                     else{
                         // alert("Sorry Please try again,You have left "+(3-count)+" chances!");
@@ -50,13 +57,20 @@
                     // alert("Please enter the number");
                     alert_notification.textContent="Please enter the number";
                 }
-            }else if(count == 3){
+            }else if(count > 3){
                 // alert("Your Chances are over!");
+                reset.classList += "visible";
                 alert_notification.textContent="Your Chances are over!";
             }
-            count++;
+            ++count;
+            alert_notification.classList += "visible";
+            
         })
 
+        reset.addEventListener('click',(e)=>{
+            count = 1;
+            alert("reset");
+        })
     </script>
 </body>
 </html>
