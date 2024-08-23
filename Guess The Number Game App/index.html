@@ -46,21 +46,25 @@
                         console.log(num,inp_num.value);
                         count == 4;
                         alert_notification.textContent=`Congratulation You won!`;
+                        // alert_notification.classList+="bg-green-500 text-white";
                         btn.disabled = true;
                     }
                     else{
                         // alert("Sorry Please try again,You have left "+(3-count)+" chances!");
                         alert_notification.textContent="Sorry Please try again,You have left "+(3-count)+" chances!";
+                        // alert_notification.classList+="bg-yellow-100 text-white";
                     }
                 }
                 else{
                     // alert("Please enter the number");
                     alert_notification.textContent="Please enter the number";
+                    // alert_notification.classList+="bg-red-500 text-white";
                 }
             }else if(count > 3){
                 // alert("Your Chances are over!");
                 reset.classList += "visible";
                 alert_notification.textContent="Your Chances are over!";
+                // alert_notification.class += "bg-red-500 text-white";
             }
             ++count;
             alert_notification.classList += "visible";
@@ -68,8 +72,7 @@
         })
 
         reset.addEventListener('click',(e)=>{
-            count = 1;
-            alert("reset");
+           window.location.reload();
         })
     </script>
 </body>
