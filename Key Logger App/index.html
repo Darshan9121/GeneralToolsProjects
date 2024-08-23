@@ -4,38 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Key Logger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div>
-        <h1>Key Logger</h1>
-        <div>
-            <button id="start_btn">Start Logging Keypresses</button>
-            <button id="stop_btn">Stop Logging Keypresses</button>
+<body class="w-screen  flex justify-center items-center">
+    <div class=" w-full flex flex-col justify-center items-center p-5 gap-5">
+        <h1 class="text-4xl font-bold">Key Logger</h1>
+        <div class="flex gap-5 p-5">
+            <button id="start_btn" class="w-fit bg-green-400 border-2 border-black rounded-lg px-2 py-4 ">Start Logging Keypresses</button>
+            <button id="stop_btn" class="w-fit bg-red-400 border-2 border-black rounded-lg px-2 py-4 ">Stop Logging Keypresses</button>
+            <button id="clr_btn" class="w-fit bg-yellow-400 border-2 border-black rounded-lg px-5 py-4 ">Clear</button>
         </div>
-        <div>
-            <div id="key_press">Key Press</div>
-            <div id="key_up">Key Realse</div>
+        <div class="flex justify-between  w-1/2 gap-5 rounded-lg">
+            <div id="key_press"  class="bg-red-100 w-1/2 text-center p-4">Key Press</div>
+            <div id="key_up" class="bg-red-100 w-1/2  text-center p-4">Key Realse</div>
         </div>
-        <div>
-            <table>
-                <thead>
-                    <tr><th>Key Logs</th></tr>
-                    <tr>
-                        <th>Key Name</th>
-                        <th>Key Press/Realse Time</th>
+        <div class="w-full border-2 border-blue-400 flex justify-center items-center">
+            <table class="border-2 border-black w-full text-2xl" >
+                <thead >
+                    <tr class="border-2 border-black"><th class="border-2 border-black" colspan="2" >Key Logs</th></tr>
+                    <tr class="border-2 border-black">
+                        <th class="border-2 border-black">Key Name</th>
+                        <th class="border-2 border-black">Key Press/Realse Time</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
                 <tfoot>
-                    <tr><td>Created by Darshan Hiragar | @darshan9121</td></tr>
+                    <tr class="border-2 border-black"><td class="border-2 border-black text-center" colspan="2">Created by Darshan Hiragar | @darshan9121</td></tr>
                 </tfoot>
             </table>
         </div>
     </div>
     <script>
-        let status = "none";
+        var status = "";
         let start_btn = document.querySelector("#start_btn");
         let stop_btn = document.querySelector("#stop_btn");
+        let clr_btn = document.querySelector("#clr_btn");
         let key_logs = document.querySelector("tbody");
         let key_press = document.querySelector("#key_press");
         let key_up = document.querySelector("#key_up");
@@ -45,8 +48,8 @@
                 key_press.innerHTML=`<h2>Key Press:${e.key}</h2>`;
                 let element = document.createElement("tr");
                 element.innerHTML = `
-                <td>${e.key}</td>
-                <td>${new Date().toUTCString()}</td>
+                <td class="text-center border-2 border-black">${e.key}</td>
+                <td class="text-center border-2 border-black">${new Date().toUTCString()}</td>
                 `;
                 key_log(element);
             }
@@ -62,8 +65,8 @@
                 key_up.innerHTML=`<h2>Key Realese:${e.key}</h2>`;
                 let element = document.createElement("tr");
                 element.innerHTML = `
-                    <td>${e.key}</td>
-                    <td>${new Date().toUTCString()}</td>
+                    <td class="text-center border-2 border-black">${e.key}</td>
+                    <td class="text-center border-2 border-black">${new Date().toUTCString()}</td>
                 `;
                 key_log(element);
 
@@ -75,13 +78,32 @@
         })
 
         start_btn.addEventListener("click",(e)=>{
-            status = "start";
-            alert("star logging");
+            if(status != "start"){
+
+                status = "start";
+                alert("star logging");
+            }else{
+                alert("Already started!");
+            }
         });
         stop_btn.addEventListener("click",(e)=>{
-            status = "stop";
-            alert("stop logging");
+            if(status == "start"){
+
+                status = "stop";
+                alert("stop logging");
+            }else{
+                alert("Please Start the session first!");
+            }
         });
+
+        clr_btn.addEventListener("click",(e)=>{
+            status="stop";
+            let newtbody = document.createElement("tbody");
+            let tr = document.createElement('tr');
+            tr.innerHTML="<td class='text-center' colspan='2'>No key pressed!</td>";
+            newtbody.appendChild(tr);
+            key_logs.replaceWith(newtbody);
+        })
 
         
       function key_log(data){
