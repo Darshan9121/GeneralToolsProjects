@@ -64,12 +64,12 @@
     }
     async function fetchData(url) {
         
-        alert("Data fetch start");
+        // alert("Data fetch start");
         fetch(url).then((result)=>result.json()).then((data)=>{
             console.log(data);
             if(data.status != "success"){
                 notification.innerHTML="Fail to load the data please try again later";
-                alert("Fail to load the data please try again later");
+                // alert("Fail to load the data please try again later");
             }
             else{
                 notification.classList.add("hidden");
