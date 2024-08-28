@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmedabad|TEch NeWs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="flex flex-col items-center justify-evenly w-screen h-screen py-2 md:p-1 lg:p-10">
+        <h1 class="text-4xl bg-red-200 text-white w-full text-center">Gujarat News</h1>
+        <hr/>
+         <div id="section" class="p-5 w-full flex flex-col gap-5">
+            <h2 id="notification" class="text-4xl bg-red-200 text-white w-full text-center m-2">Loading Data</h2>
+       
+        </div>
+        <div id="navigation" class="p-5 flex flex-row justify-between items-center w-full hidden">
+            <button class="  px-5 py-2 bg-red-200 text-white text-center text-bold" name="prv" onclick="getData()">Previous</button>
+            <button class=" px-5 py-2 bg-red-200 text-white text-center text-bold" name="nxt" onclick="getData()">Next</button>
+        </div>
+        <footer class="w-full flex flex-col justify-center items-center">
+            <h2 class="text-2xl">Follow Us</h2>
+            <div class="flex flex-row gap-1 justify-evenly w-full">
+                <a href=""><img src="../Assets/social_media_icon/ig.png" alt="img" class="w-[30px] h-[30px]"/></a>
+                <a href=""><img src="../Assets/social_media_icon/f.png" alt="img" class="w-[30px] h-[30px]"/></a>
+                <a href=""><img src="../Assets/social_media_icon/x.png" alt="img" class="w-[30px] h-[30px]"/></a>
+
+            </div>
+        </footer>
+    </div>
+</body>
+<script>
+
+    var Datas;
+    let fetched = false;
+    var fetchfirst = false;
+    let notification = document.querySelector("#notification");
+    function processingData(data){
+        data = Object.entries(data);
+        // let newdata = data[]
+        let newData=[];
+       data[2][1].map((ele1)=>{
+            
+            if(ele1.title.includes("")){
+               newData.push(ele1);
+            }
+        
+        })
+        console.log(newData);
+        return newData;
+    }
+    function displayData(data){
+        let news = document.querySelector("#section");
+        data.map((element)=>{
+            let section = document.createElement("article");
+            section.className = "p-5 border-2 border-red-200 bg-white flex flex-col gap-2 justify-evenly";
+            let content =`<h2 class="text-xl font-bold">${element.title}</h2><sup class="font-bold text-xl">${element.pubDate}</sup><p class="text-md text-bold">${element.description}</p><a href="${element.link}" target="_blank" class="w-full bg-red-200 text-white text-center font-bold px-5 py-2">Click here to read more.</a>` ;
+            section.innerHTML=content;
+            news.append(section);
+     } );
+    
+        
+
+    }
+    async function fetchData(url) {
+        
+        alert("Data fetch start");
+        fetch(url).then((result)=>result.json()).then((data)=>{
+            console.log(data);
+            if(data.status != "success"){
+                notification.innerHTML="Fail to load the data please try again later";
+                alert("Fail to load the data please try again later");
+            }
+            else{
+                notification.classList.add("hidden");
+              fetchfirst = true;
+            fetched=true;
+           let newdata = processingData(data);
+            displayData(newdata);
+     } })
+        
+          
+        
+    } 
+
+  
+
+    // function getData() {
+    //     if(event.target.name == "prv"){
+    //         // alert("prv")
+    //         if(fetchfirst){
+    //             alert("On the home page");
+    //         }
+    //         else{
+    //             alert("go to previous");
+    //         }
+    //     }
+    //     else if(event.target.name == "nxt"){
+    //         // alert("nxt")
+    //         fetchData(`https://newsdata.io/api/1/news?apikey=pub_${Datas.nextPage}&q=ahmedabad&country=in&language=en&category=technology,top`);
+
+    //     }
+    // }
+
+
+
+    window.addEventListener("load",async()=>{
+       
+       
+          await  fetchData("https://newsdata.io/api/1/news?apikey=pub_51875727e1e8ea31c565c15cc40d69bbb9d3c&q=ahmedabad&country=in&language=en&category=technology,top");
+        
+    });
+
+</script>
+</html>
